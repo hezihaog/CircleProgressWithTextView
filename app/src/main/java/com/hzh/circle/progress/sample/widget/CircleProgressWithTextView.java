@@ -1,6 +1,5 @@
 package com.hzh.circle.progress.sample.widget;
 
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -10,7 +9,6 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
-import android.view.animation.LinearInterpolator;
 
 /**
  * Package: com.hzh.circle.progress.sample.widget
@@ -72,7 +70,7 @@ public class CircleProgressWithTextView extends View {
         //外圆画笔
         mCirclePaint = new Paint();
         mCirclePaint.setColor(mCircleColor);
-        mCirclePaint.setStrokeWidth(dip2px(getContext(), 1f));
+        mCirclePaint.setStrokeWidth(dip2px(getContext(), 1.5f));
         mCirclePaint.setStyle(Paint.Style.STROKE);
         //设置笔触为圆角
         mCirclePaint.setStrokeCap(Paint.Cap.ROUND);
@@ -80,25 +78,10 @@ public class CircleProgressWithTextView extends View {
         //文字画笔
         mTextPaint = new Paint();
         mTextPaint.setColor(mTextColor);
-        mTextPaint.setStrokeWidth(dip2px(getContext(), 2f));
+        mTextPaint.setStrokeWidth(dip2px(getContext(), 1f));
         mTextPaint.setStyle(Paint.Style.FILL);
         mTextPaint.setTextSize(sp2px(getContext(), 17f));
         mTextPaint.setAntiAlias(true);
-
-        ValueAnimator animator = ValueAnimator.ofFloat(0, 100);
-        animator.setInterpolator(new LinearInterpolator());
-        animator.setRepeatCount(ValueAnimator.INFINITE);
-        animator.setRepeatMode(ValueAnimator.RESTART);
-        animator.setDuration(2000);
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                Float cValue = (Float) animation.getAnimatedValue();
-                setProgress(cValue);
-                postInvalidate();
-            }
-        });
-        animator.start();
     }
 
     @Override
@@ -179,6 +162,7 @@ public class CircleProgressWithTextView extends View {
 
     public synchronized void setProgress(float mProgress) {
         this.mProgress = mProgress;
+        postInvalidate();
     }
 
     public float getMax() {
@@ -187,6 +171,7 @@ public class CircleProgressWithTextView extends View {
 
     public synchronized void setMax(float mMax) {
         this.mMax = mMax;
+        postInvalidate();
     }
 
     public static int dip2px(Context context, float dipValue) {

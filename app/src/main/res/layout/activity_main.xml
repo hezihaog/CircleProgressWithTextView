@@ -6,6 +6,7 @@
     tools:context="com.hzh.circle.progress.sample.MainActivity">
 
     <com.hzh.circle.progress.sample.widget.CircleProgressWithTextView
+        android:id="@+id/circleProgress"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:paddingLeft="10dp"
