@@ -70,7 +70,7 @@ public class CircleProgressWithTextView extends View {
         //外圆画笔
         mCirclePaint = new Paint();
         mCirclePaint.setColor(mCircleColor);
-        mCirclePaint.setStrokeWidth(dip2px(getContext(), 1.5f));
+        mCirclePaint.setStrokeWidth(dip2px(getContext(), 5f));
         mCirclePaint.setStyle(Paint.Style.STROKE);
         //设置笔触为圆角
         mCirclePaint.setStrokeCap(Paint.Cap.ROUND);
@@ -137,15 +137,17 @@ public class CircleProgressWithTextView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         canvas.scale(0.98f, 0.98f, mCenterX, mCenterY);
+        mCirclePaint.setColor(mRemainCircleColor);
+        canvas.drawCircle(mCenterX, mCenterY, mRadius,mCirclePaint);
         //绘制当前进度的弧线
         mCirclePaint.setColor(mCircleColor);
         float curProgress = getProgress();
         float angle = 360 * (curProgress * 1.0f / getMax());
         canvas.drawArc(mRect, mStartAngle, angle, false, mCirclePaint);
         //绘制剩下的度数的弧线
-        float remainAngle = 360f - angle;
-        mCirclePaint.setColor(mRemainCircleColor);
-        canvas.drawArc(mRect, mStartAngle + angle, remainAngle, false, mCirclePaint);
+        //float remainAngle = 360f - angle;
+        //mCirclePaint.setColor(mRemainCircleColor);
+        //canvas.drawArc(mRect, mStartAngle + angle, remainAngle, false, mCirclePaint);
         //画文字
         String progressText = String.valueOf((int) curProgress);
         Paint.FontMetrics fontMetrics = mTextPaint.getFontMetrics();
