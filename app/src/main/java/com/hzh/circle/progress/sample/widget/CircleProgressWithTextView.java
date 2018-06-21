@@ -26,7 +26,10 @@ public class CircleProgressWithTextView extends View {
     private RectF mRect;
     private Paint mCirclePaint;
     private Paint mTextPaint;
-    //画笔颜色
+    private Paint mPercentPaint;
+    /**
+     * 画笔颜色
+     */
     private int mCircleColor = Color.parseColor("#0AA4A2");
     private int mRemainCircleColor = Color.parseColor("#EFEFF0");
     private int mTextColor = Color.parseColor("#0AA4A2");
@@ -35,11 +38,17 @@ public class CircleProgressWithTextView extends View {
      */
     private int mWidth;
     private int mHeight;
-    //外圆半径
+    /**
+     * 外圆半径
+     */
     private float mRadius;
-    //当前进度
+    /**
+     * 当前进度
+     */
     private float mProgress;
-    //进度最大值
+    /**
+     * 进度最大值
+     */
     private float mMax = 100;
     /**
      * 弧线的开始角度，默认是0，是水平的，我们要从上面开始画
@@ -82,6 +91,13 @@ public class CircleProgressWithTextView extends View {
         mTextPaint.setStyle(Paint.Style.FILL);
         mTextPaint.setTextSize(sp2px(getContext(), 17f));
         mTextPaint.setAntiAlias(true);
+        //百分比画笔
+        mPercentPaint = new Paint();
+        mPercentPaint.setColor(mTextColor);
+        mPercentPaint.setStrokeWidth(dip2px(getContext(), 1f));
+        mPercentPaint.setStyle(Paint.Style.FILL);
+        mPercentPaint.setTextSize(sp2px(getContext(), 13f));
+        mPercentPaint.setAntiAlias(true);
     }
 
     @Override
@@ -138,7 +154,7 @@ public class CircleProgressWithTextView extends View {
         super.onDraw(canvas);
         canvas.scale(0.98f, 0.98f, mCenterX, mCenterY);
         mCirclePaint.setColor(mRemainCircleColor);
-        canvas.drawCircle(mCenterX, mCenterY, mRadius,mCirclePaint);
+        canvas.drawCircle(mCenterX, mCenterY, mRadius, mCirclePaint);
         //绘制当前进度的弧线
         mCirclePaint.setColor(mCircleColor);
         float curProgress = getProgress();
@@ -156,6 +172,20 @@ public class CircleProgressWithTextView extends View {
         float startX = mCenterX - (textWidth / 2);
         float endY = mCenterY + baseLine;
         canvas.drawText(progressText, startX, endY, mTextPaint);
+        //画百分比
+        String percentText = "%";
+        //百分比文字的宽度
+        //float percentTextWidth = mTextPaint.measureText(percentText);
+        //计算百分比文字的起始X坐标
+        float percentStartX = 0;
+        if (progressText.length() == 1) {
+            percentStartX = mCenterX + dip2px(getContext(), 5f);
+        } else if (progressText.length() == 2) {
+            percentStartX = mCenterX + dip2px(getContext(), 10f);
+        }
+        //百分比文字Y坐标，中心点Y坐标，和数值文字的Y坐标一样
+        float percentEndY = mCenterY + baseLine;
+        canvas.drawText(percentText, percentStartX, percentEndY, mPercentPaint);
     }
 
     public float getProgress() {
