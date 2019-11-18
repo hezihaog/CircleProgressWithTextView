@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 圆形CD进度View -->
+    <declare-styleable name="CircleProgressWithTextView">
+        <!-- 外圆颜色 -->
+        <attr name="cpt_circle_color" format="reference|color" />
+        <!-- 圆弧颜色 -->
+        <attr name="cpt_remain_circle_color" format="reference|color" />
+        <!-- 文字颜色 -->
+        <attr name="cpt_text_color" format="reference|color" />
+        <!--当前进度值-->
+        <attr name="cpt_progress" format="integer" />
+        <!--进度的最大值-->
+        <attr name="cpt_max" format="integer" />
+        <!--圆弧轮廓的宽度-->
+        <attr name="cpt_remain_circle_border_width" format="dimension" />
+        <!-- 是否显示进度百分比文字 -->
+        <attr name="cpt_text_enable" format="boolean" />
+        <!-- 背景颜色 -->
+        <attr name="cpt_bg_color" format="reference|color" />
+    </declare-styleable>
+</resources>

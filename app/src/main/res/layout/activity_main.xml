@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,9 +10,16 @@
         android:id="@+id/circleProgress"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:layout_centerInParent="true"
         android:paddingLeft="10dp"
-        android:paddingRight="10dp"
         android:paddingTop="10dp"
+        android:paddingRight="10dp"
         android:paddingBottom="10dp"
-        android:layout_centerInParent="true" />
+        app:cpt_circle_color="#0AA4A2"
+        app:cpt_text_color="#0AA4A2"
+        app:cpt_max="100"
+        app:cpt_progress="30"
+        app:cpt_remain_circle_border_width="3dp"
+        app:cpt_remain_circle_color="#EFEFF0"
+        app:cpt_text_enable="true" />
 </RelativeLayout>
